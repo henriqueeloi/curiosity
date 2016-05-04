@@ -13,84 +13,44 @@ import br.com.eloi.curiosity.modelo.Vector;
 
 public class SondaTest {
 
-//	@Test
-//	public void deveMoverParaDireita() {
-//		Sonda sonda = new Sonda();
-//		sonda.moveRight(20);		
-//	}
 	
 	@Test
-	public void deveSeguirCoordenadas(){
+	public void deveSeguirCoordenadasPrimeiraSonda(){
 		
-		String moviments = "LMLMLMLMM";
+		String inputMoviments = "LMLMLMLMM";
 				
 		Sonda sonda = new Sonda(new Position(new Vector(1,2), Direction.NORTH));
 		
-		sonda.drive(moviments);
+		sonda.drive(inputMoviments);
 	
 		assertThat(sonda.getCurrentPosition().getCoordinate(), equalTo(new Vector(1,3)));
+		assertThat(sonda.getCurrentPosition().getDirection(), equalTo(Direction.NORTH));
 	}
 	
-//	@Test
-//	public void validarDirecaoDiferente(){
-//		Sonda sonda = new Sonda().moveRight(20);
-//		
-//		assertThat(sonda.getCurrentPosition(), not(new Position(30, 0)));
-//	}
-//	
-//	@Test
-//	public void deveMoverParaCima(){
-//		Sonda sonda = new Sonda();
-//		sonda.moveUp(10);
-//	
-//		assertThat(sonda.getCurrentPosition(), equalTo(new Position(0, 10)));
-//	}
-//	
-//	@Test
-//	public void deveMoverParaDiretaEparaCima(){
-//		Sonda sonda = new Sonda();
-//		sonda.moveRight(20)
-//		.moveUp(10);
-//		
-//		assertThat(sonda.getCurrentPosition(), equalTo(new Position(20, 10)));
-//	}
-//	
-//	@Test
-//	public void deveMoverParaBaixo(){
-//		Sonda sonda = new Sonda();
-//		sonda.moveDown(40);
-//		assertThat(sonda.getCurrentPosition(), equalTo(new Position(0, -40)));
-//	}
-//	
-//	@Test
-//	public void deveMoverParaDireitaEparaBaixo(){
-//		Sonda sonda = new Sonda();
-//		sonda.moveRight(15).moveDown(40);
-//		assertThat(sonda.getCurrentPosition(), equalTo(new Position(15, -40)));
-//	}
-//	
-//	@Test
-//	public void deveMoverParaEsquerda(){
-//		Sonda sonda = new Sonda();
-//		sonda.moveLeft(20);
-//		assertThat(sonda.getCurrentPosition(), equalTo(new Position(-20, 0)));
-//	}
-//	
-//	@Test
-//	public void deveMoverParaEsquerdaEparaCima(){
-//		Sonda sonda = new Sonda();
-//		sonda.moveLeft(20)
-//		.moveUp(10);
-//		assertThat(sonda.getCurrentPosition(), equalTo(new Position(-20, 10)));
-//	}
-//	
-//	@Test
-//	public void deveMoverParaEsquerdaEparaBaixo(){
-//		Sonda sonda = new Sonda();
-//		sonda.moveLeft(20)
-//		.moveDown(10);
-//		assertThat(sonda.getCurrentPosition(), equalTo(new Position(-20, -10)));
-//	}
+	@Test
+	public void deveSeguirCoordenadasSegundaSonda(){
+		String inputMoviments = "MMRMMRMRRM";
+		
+		Sonda sonda = new Sonda(new Position(new Vector(3,3), Direction.EAST));
+		
+		sonda.drive(inputMoviments);
+	
+		assertThat(sonda.getCurrentPosition().getCoordinate(), equalTo(new Vector(5,1)));
+		assertThat(sonda.getCurrentPosition().getDirection(), equalTo(Direction.EAST));
+	}
+	
+	@Test
+	public void deveSeguirCoordenadasComDirecaoDiferante(){
+		String inputMoviments = "RMRMLM";
+		
+		Sonda sonda = new Sonda(new Position(new Vector(2,2), Direction.NORTH));
+		
+		sonda.drive(inputMoviments);
+	
+		assertThat(sonda.getCurrentPosition().getCoordinate(), equalTo(new Vector(4,1)));
+		assertThat(sonda.getCurrentPosition().getDirection(), equalTo(Direction.EAST));
+	}
+	
 	
 	
 }

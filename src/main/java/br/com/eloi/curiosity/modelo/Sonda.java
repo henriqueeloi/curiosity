@@ -1,7 +1,9 @@
 package br.com.eloi.curiosity.modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Sonda {
 
@@ -45,47 +47,14 @@ public class Sonda {
 		return this;
 	}
 	
-	public Sonda right() {
-	
-		if(getCurrentPosition().getDirection().equals(Direction.NORTH)){
-			moveTo(new Position(getCurrentPosition().getCoordinate(), Direction.EAST));
-			return this;
-		}
-		if(getCurrentPosition().getDirection().equals(Direction.EAST)){
-			moveTo(new Position(getCurrentPosition().getCoordinate(), Direction.SOUTH));
-			return this;
-		}
-		if(getCurrentPosition().getDirection().equals(Direction.SOUTH)){
-			moveTo(new Position(getCurrentPosition().getCoordinate(), Direction.WEST));
-			return this;
-		}
-		if(getCurrentPosition().getDirection().equals(Direction.WEST)){
-			moveTo(new Position(getCurrentPosition().getCoordinate(), Direction.NORTH));
-			return this;
-		}
-		
-		return this;
+	public void right() {
+		Direction direction = getCurrentPosition().getDirection().getMoviment().turnRight();		
+		moveTo(new Position(getCurrentPosition().getCoordinate(),  direction));
 	}
 
-	public Sonda left() {
-		if(getCurrentPosition().getDirection().equals(Direction.NORTH)){
-			moveTo(new Position(getCurrentPosition().getCoordinate(), Direction.WEST));
-			return this;
-		}
-		if(getCurrentPosition().getDirection().equals(Direction.WEST)){
-			moveTo(new Position(getCurrentPosition().getCoordinate(), Direction.SOUTH));
-			return this;
-		}
-		if(getCurrentPosition().getDirection().equals(Direction.SOUTH)){
-			moveTo(new Position(getCurrentPosition().getCoordinate(), Direction.EAST));
-			return this;
-		}
-		if(getCurrentPosition().getDirection().equals(Direction.EAST)){
-			moveTo(new Position(getCurrentPosition().getCoordinate(), Direction.NORTH));
-			return this;
-		}
-		
-		return this;
+	public void left() {
+		Direction direction = getCurrentPosition().getDirection().getMoviment().turnLeft();		
+		moveTo(new Position(getCurrentPosition().getCoordinate(),  direction));
 	}
 
 	public void drive(String moviments) {
@@ -105,6 +74,13 @@ public class Sonda {
 					break;
 			}
 		}
+		
+		Map<String, Integer> command2 = new HashMap<String, Integer>() {{
+			put("L", 1);
+			put("R", 5);
+			put("M", 10);				
+		}};
+
 		
 		 
 	}

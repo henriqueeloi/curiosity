@@ -13,8 +13,8 @@ public class West implements Moviments {
 	}
 
 	@Override
-	public Vector move() {
-		return new Vector(-1, 0);
+	public Vector move(Vector coordinate) {
+		return coordinate.add(-1, 0);
 	}
 
 }

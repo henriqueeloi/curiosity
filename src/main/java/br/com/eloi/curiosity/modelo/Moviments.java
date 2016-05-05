@@ -4,6 +4,6 @@ public interface Moviments {
 
 	public Direction turnRight();
 	public Direction turnLeft();
-	public Vector move();
+	public Vector move(Vector coordinate);
 		
 }

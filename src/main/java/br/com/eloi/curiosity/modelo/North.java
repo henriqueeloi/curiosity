@@ -13,8 +13,8 @@ public class North implements Moviments {
 	}
 
 	@Override
-	public Vector move() {
-		return new Vector(0, 1);
+	public Vector move(Vector coordinate) {
+		return coordinate.add(0, 1);
 	}
 
 }

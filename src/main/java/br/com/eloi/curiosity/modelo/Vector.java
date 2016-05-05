@@ -17,7 +17,7 @@ public class Vector {
 		this.y=y;
 	}
 	
-	public Vector move(int x, int y) {
+	public Vector add(int x, int y) {
 		this.x += x;
 		this.y += y;
 		return this;

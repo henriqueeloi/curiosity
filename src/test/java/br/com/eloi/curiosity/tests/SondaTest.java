@@ -4,9 +4,13 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 
 import br.com.eloi.curiosity.modelo.Direction;
+import br.com.eloi.curiosity.modelo.Instruction;
 import br.com.eloi.curiosity.modelo.Position;
 import br.com.eloi.curiosity.modelo.Sonda;
 import br.com.eloi.curiosity.modelo.Vector;
@@ -17,11 +21,21 @@ public class SondaTest {
 	@Test
 	public void deveSeguirCoordenadasPrimeiraSonda(){
 		
-		String inputMoviments = "LMLMLMLMM";
-				
+		List<Instruction> inputInstructios = 
+				Arrays.asList(
+						Instruction.LEFT, 
+						Instruction.MOVE, 
+						Instruction.LEFT,
+						Instruction.MOVE,
+						Instruction.LEFT,
+						Instruction.MOVE,
+						Instruction.LEFT,
+						Instruction.MOVE,
+						Instruction.MOVE);
+						
 		Sonda sonda = new Sonda(new Position(new Vector(1,2), Direction.NORTH));
 		
-		sonda.drive(inputMoviments);
+		sonda.drive(inputInstructios);
 	
 		assertThat(sonda.getCurrentPosition().getCoordinate(), equalTo(new Vector(1,3)));
 		assertThat(sonda.getCurrentPosition().getDirection(), equalTo(Direction.NORTH));
@@ -29,11 +43,29 @@ public class SondaTest {
 	
 	@Test
 	public void deveSeguirCoordenadasSegundaSonda(){
-		String inputMoviments = "MMRMMRMRRM";
 		
+//		MM RM MR MR RM
+		
+		List<Instruction> inputInstructios = 
+				Arrays.asList(
+						Instruction.MOVE, 
+						Instruction.MOVE, 
+						
+						Instruction.RIGHT,
+						Instruction.MOVE,						
+						
+						Instruction.MOVE,
+						Instruction.RIGHT,						
+						
+						Instruction.MOVE,
+						Instruction.RIGHT,						
+						
+						Instruction.RIGHT,
+						Instruction.MOVE);
+						
 		Sonda sonda = new Sonda(new Position(new Vector(3,3), Direction.EAST));
 		
-		sonda.drive(inputMoviments);
+		sonda.drive(inputInstructios);
 	
 		assertThat(sonda.getCurrentPosition().getCoordinate(), equalTo(new Vector(5,1)));
 		assertThat(sonda.getCurrentPosition().getDirection(), equalTo(Direction.EAST));
@@ -41,16 +73,23 @@ public class SondaTest {
 	
 	@Test
 	public void deveSeguirCoordenadasComDirecaoDiferante(){
-		String inputMoviments = "RMRMLM";
+		String inputMoviments = "RM RM LM";
+		
+		List<Instruction> inputInstructios = 
+				Arrays.asList(
+						Instruction.RIGHT, 
+						Instruction.MOVE, 						
+						Instruction.RIGHT,
+						Instruction.MOVE,												
+						Instruction.LEFT,
+						Instruction.MOVE);
 		
 		Sonda sonda = new Sonda(new Position(new Vector(2,2), Direction.NORTH));
 		
-		sonda.drive(inputMoviments);
+		sonda.drive(inputInstructios);
 	
 		assertThat(sonda.getCurrentPosition().getCoordinate(), equalTo(new Vector(4,1)));
 		assertThat(sonda.getCurrentPosition().getDirection(), equalTo(Direction.EAST));
 	}
-	
-	
-	
+		
 }

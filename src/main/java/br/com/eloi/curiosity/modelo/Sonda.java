@@ -1,7 +1,9 @@
 package br.com.eloi.curiosity.modelo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +21,6 @@ public class Sonda {
 		moveTo(position);
 	}
 	
-
 	private void moveTo(Position position) {
 		positions.add(position);
 	}
@@ -28,44 +29,17 @@ public class Sonda {
 		return positions.size() > 0 ? positions.get(positions.size()-1) : null; 
 	}
  
-	public void move(){
-		moveTo(getCurrentPosition().move());		
-	}
-	
-	public void right() {
-		moveTo(getCurrentPosition().right());				
-	}
-
-	public void left() {
-		moveTo(getCurrentPosition().left());
-	}
-
-	public void drive(String moviments) {
-		 
-		for (char moviment : moviments.toCharArray()) {
-			switch(moviment) {
-				case 'L':
-					this.left();
-					break;
-					
-				case 'R':
-					this.right();
-					break;
-					
-				case 'M':
-					this.move();
-					break;
+	public void drive(List<Instruction> instructions) {		 
+						
+		instructions.stream().forEach(item -> {
+			if(item.equals(Instruction.LEFT)){
+				moveTo(getCurrentPosition().left());
+			}else if(item.equals(Instruction.RIGHT)){
+				moveTo(getCurrentPosition().right());
+			}else if(item.equals(Instruction.MOVE)){
+				moveTo(getCurrentPosition().move());
 			}
-		}
+		});
 		
-		Map<String, Integer> command2 = new HashMap<String, Integer>() {{
-			put("L", 1);
-			put("R", 5);
-			put("M", 10);				
-		}};
-
-		
-		 
 	}
-
 }

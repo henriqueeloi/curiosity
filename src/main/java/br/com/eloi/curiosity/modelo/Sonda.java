@@ -27,34 +27,17 @@ public class Sonda {
 	public Position getCurrentPosition() {		
 		return positions.size() > 0 ? positions.get(positions.size()-1) : null; 
 	}
-
  
-	public Sonda move(){
-		
-		if(getCurrentPosition().getDirection().equals(Direction.NORTH)){
-			moveTo(new Position(getCurrentPosition().getCoordinate().move(0, 1), getCurrentPosition().getDirection()));
-		}
-		if(getCurrentPosition().getDirection().equals(Direction.SOUTH)){
-			moveTo(new Position(getCurrentPosition().getCoordinate().move(0, -1), getCurrentPosition().getDirection()));
-		}
-		if(getCurrentPosition().getDirection().equals(Direction.EAST)){
-			moveTo(new Position(getCurrentPosition().getCoordinate().move(1, 0), getCurrentPosition().getDirection()));
-		}
-		if(getCurrentPosition().getDirection().equals(Direction.WEST)){
-			moveTo(new Position(getCurrentPosition().getCoordinate().move(-1, 0), getCurrentPosition().getDirection()));
-		}
-		
-		return this;
+	public void move(){
+		moveTo(getCurrentPosition().move());		
 	}
 	
 	public void right() {
-		Direction direction = getCurrentPosition().getDirection().getMoviment().turnRight();		
-		moveTo(new Position(getCurrentPosition().getCoordinate(),  direction));
+		moveTo(getCurrentPosition().right());				
 	}
 
 	public void left() {
-		Direction direction = getCurrentPosition().getDirection().getMoviment().turnLeft();		
-		moveTo(new Position(getCurrentPosition().getCoordinate(),  direction));
+		moveTo(getCurrentPosition().left());
 	}
 
 	public void drive(String moviments) {

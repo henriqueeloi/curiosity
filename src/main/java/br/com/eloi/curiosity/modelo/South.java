@@ -13,9 +13,8 @@ public class South implements Moviments {
 	}
 
 	@Override
-	public Moviments move() {
-		// TODO Auto-generated method stub
-		return null;
+	public Vector move() {
+		return new Vector(0, -1);
 	}
 
 }

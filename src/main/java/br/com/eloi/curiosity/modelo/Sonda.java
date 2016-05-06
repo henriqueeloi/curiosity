@@ -1,11 +1,7 @@
 package br.com.eloi.curiosity.modelo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class Sonda {
 
@@ -13,15 +9,15 @@ public class Sonda {
 
 	public Sonda() {
 		positions = new ArrayList<Position>();
-		moveTo(new Position(new Vector(0,0), Direction.NORTH));
+		newPosition(new Position(new Vector(0,0), Direction.NORTH));
 	}
 	
 	public Sonda(Position position) {
 		positions = new ArrayList<Position>();
-		moveTo(position);
+		newPosition(position);
 	}
 	
-	private void moveTo(Position position) {
+	private void newPosition(Position position) {
 		positions.add(position);
 	}
 		
@@ -33,13 +29,25 @@ public class Sonda {
 						
 		instructions.stream().forEach(item -> {
 			if(item.equals(Instruction.LEFT)){
-				moveTo(getCurrentPosition().left());
+				moveToLeft();
 			}else if(item.equals(Instruction.RIGHT)){
-				moveTo(getCurrentPosition().right());
+				moveToRight();
 			}else if(item.equals(Instruction.MOVE)){
-				moveTo(getCurrentPosition().move());
+				moveForward();
 			}
 		});
 		
+	}
+
+	private void moveForward() {
+		newPosition(getCurrentPosition().move());
+	}
+
+	private void moveToRight() {
+		newPosition(getCurrentPosition().right());
+	}
+
+	private void moveToLeft() {
+		newPosition(getCurrentPosition().left());
 	}
 }

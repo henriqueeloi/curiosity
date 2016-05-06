@@ -5,7 +5,6 @@ public class Position {
 	private Direction direction;
 	private Vector vector;
 	
-	
 	public Position() {
 	}
 	
@@ -33,7 +32,5 @@ public class Position {
 	public Position move() {
 		return new Position(this.getDirection().getMoviment().move(vector), this.getDirection());
 	}
-	
-	
 	
 }

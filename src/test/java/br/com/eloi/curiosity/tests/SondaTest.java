@@ -1,7 +1,6 @@
 package br.com.eloi.curiosity.tests;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
@@ -73,7 +72,6 @@ public class SondaTest {
 	
 	@Test
 	public void deveSeguirCoordenadasComDirecaoDiferante(){
-		String inputMoviments = "RM RM LM";
 		
 		List<Instruction> inputInstructios = 
 				Arrays.asList(

@@ -5,17 +5,23 @@ import java.util.List;
 
 public class Planet {
 	
-	private String name;
+	private String name;	
+	private Vector area;
+	List<Sonda> sondas = null;
+	
+	public Vector getArea() {
+		return area;
+	}
 	
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
+	
+	public Planet(String name, Vector area){
 		this.name = name;
+		this.area=area;
+		sondas = new ArrayList<Sonda>();
 	}
-
-	List<Sonda> sondas = null;
 	
 	public Planet() {
 		sondas = new ArrayList<Sonda>();

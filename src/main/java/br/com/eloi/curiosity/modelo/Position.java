@@ -22,15 +22,15 @@ public class Position {
 	}
 
 	public Position right(){
-		return new Position(vector, this.getDirection().getMoviment().turnRight());
+		return new Position(vector, direction.getMoviment().turnRight());
 	}
 
 	public Position left() {
-		return new Position(vector, this.getDirection().getMoviment().turnLeft());
+		return new Position(vector, direction.getMoviment().turnLeft());
 	}
 
 	public Position move() {
-		return new Position(this.getDirection().getMoviment().move(vector), this.getDirection());
+		return new Position(direction.getMoviment().move(vector), this.getDirection());
 	}
 	
 }

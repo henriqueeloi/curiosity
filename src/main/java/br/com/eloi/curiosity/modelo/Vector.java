@@ -2,6 +2,16 @@ package br.com.eloi.curiosity.modelo;
 
 public class Vector {
 	private int x;
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	private int y;
+	
 	public int getX() {
 		return x;
 	}
@@ -9,8 +19,9 @@ public class Vector {
 	public int getY() {
 		return y;
 	}
-
-	private int y;
+	
+	public Vector() {
+	}
 	
 	public Vector(int x, int y) {
 		this.x=x;

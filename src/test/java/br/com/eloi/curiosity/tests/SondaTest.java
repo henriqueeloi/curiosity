@@ -63,7 +63,6 @@ public class SondaTest {
 						Instruction.MOVE);
 						
 		Sonda sonda = new Sonda(new Position(new Vector(3,3), Direction.EAST));
-		
 		sonda.drive(inputInstructios);
 	
 		assertThat(sonda.getCurrentPosition().getCoordinate(), equalTo(new Vector(5,1)));

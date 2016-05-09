@@ -5,18 +5,19 @@ import org.springframework.hateoas.ResourceSupport;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import br.com.eloi.curiosity.modelo.Planet;
+import br.com.eloi.curiosity.modelo.Sonda;
 
-public class PlanetResource extends ResourceSupport  {
+public class SondaResource extends ResourceSupport {
 
-	final private Planet content;
+	final private Sonda content;
 
     @JsonCreator
-    public PlanetResource(@JsonProperty("content") Planet content) {
+    public SondaResource(@JsonProperty("content") Sonda content) {
         this.content = content;
     }
     
-    public Planet getContent() {
+    public Sonda getContent() {
         return content;
     }
+	
 }

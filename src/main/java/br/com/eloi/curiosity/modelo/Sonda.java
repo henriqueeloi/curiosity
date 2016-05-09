@@ -5,6 +5,12 @@ import java.util.List;
 
 public class Sonda {
 
+	private String name;
+	
+	public String getName() {
+		return name;
+	}
+
 	List<Position> positions = null;
 
 	public Sonda() {
@@ -13,6 +19,12 @@ public class Sonda {
 	}
 	
 	public Sonda(Position position) {
+		positions = new ArrayList<Position>();
+		newPosition(position);
+	}
+	
+	public Sonda(String name, Position position) {
+		this.name = name;
 		positions = new ArrayList<Position>();
 		newPosition(position);
 	}

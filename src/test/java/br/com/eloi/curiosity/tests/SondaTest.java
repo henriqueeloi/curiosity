@@ -32,7 +32,7 @@ public class SondaTest {
 						Instruction.MOVE,
 						Instruction.MOVE);
 						
-		Sonda sonda = new Sonda(new Position(new Vector(1,2), Direction.NORTH));
+		Sonda sonda = new Sonda(new Position(1, 2, Direction.NORTH));
 		
 		sonda.drive(inputInstructios);
 	
@@ -42,9 +42,7 @@ public class SondaTest {
 	
 	@Test
 	public void deveSeguirCoordenadasSegundaSonda(){
-		
-//		MM RM MR MR RM
-		
+				
 		List<Instruction> inputInstructios = 
 				Arrays.asList(
 						Instruction.MOVE, 
@@ -61,8 +59,8 @@ public class SondaTest {
 						
 						Instruction.RIGHT,
 						Instruction.MOVE);
-						
-		Sonda sonda = new Sonda(new Position(new Vector(3,3), Direction.EAST));
+								
+		Sonda sonda = new Sonda(new Position(3, 3, Direction.EAST));
 		sonda.drive(inputInstructios);
 	
 		assertThat(sonda.getCurrentPosition().getCoordinate(), equalTo(new Vector(5,1)));
@@ -81,7 +79,7 @@ public class SondaTest {
 						Instruction.LEFT,
 						Instruction.MOVE);
 		
-		Sonda sonda = new Sonda(new Position(new Vector(2,2), Direction.NORTH));
+		Sonda sonda = new Sonda(new Position(2, 2, Direction.NORTH));
 		
 		sonda.drive(inputInstructios);
 	

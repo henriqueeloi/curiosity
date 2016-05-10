@@ -6,16 +6,15 @@ import java.util.List;
 public class Sonda {
 
 	private String name;
+	List<Position> positions = null;
 	
 	public String getName() {
 		return name;
 	}
 
-	List<Position> positions = null;
-
 	public Sonda() {
 		positions = new ArrayList<Position>();
-		newPosition(new Position(new Vector(0,0), Direction.NORTH));
+		newPosition(new Position(0, 0, Direction.NORTH));
 	}
 	
 	public Sonda(Position position) {
@@ -24,8 +23,8 @@ public class Sonda {
 	}
 	
 	public Sonda(String name, Position position) {
-		this.name = name;
 		positions = new ArrayList<Position>();
+		this.name = name;
 		newPosition(position);
 	}
 	
@@ -38,28 +37,6 @@ public class Sonda {
 	}
  
 	public void drive(List<Instruction> instructions) {		 
-						
-		instructions.stream().forEach(item -> {
-			if(item.equals(Instruction.LEFT)){
-				moveToLeft();
-			}else if(item.equals(Instruction.RIGHT)){
-				moveToRight();
-			}else if(item.equals(Instruction.MOVE)){
-				moveForward();
-			}
-		});
-		
-	}
-
-	private void moveForward() {
-		newPosition(getCurrentPosition().move());
-	}
-
-	private void moveToRight() {
-		newPosition(getCurrentPosition().right());
-	}
-
-	private void moveToLeft() {
-		newPosition(getCurrentPosition().left());
+		newPosition(this.getCurrentPosition().change(instructions));	
 	}
 }

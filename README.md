@@ -12,7 +12,7 @@ application/json
 
 ### Incluir novo planeta 
 > POST /planets/Marte HTTP/1.1
-> Content-Type: application/json
+Content-Type: application/json
 
 {
     "x": 5,

@@ -11,12 +11,18 @@ application/json
 ## Endpoints
 
 ### Incluir novo planeta 
-[/planets/{name}], methods=[POST]
-### Exemplo Playload
-  {
-      "x": 5,
-      "y": 5
-  }
+POST /planets/Marte HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: 7a2a9ada-53dc-fe6c-b746-2e2835be91a3
+
+{
+    "x": 5,
+    "y": 5
+}
+
+# 
   
 ### Retorna todos os planetas
 [/planets], methods=[GET]

@@ -11,11 +11,8 @@ application/json
 ## Endpoints
 
 ### Incluir novo planeta 
-POST /planets/Marte HTTP/1.1
-Host: localhost:8080
-Content-Type: application/json
-Cache-Control: no-cache
-Postman-Token: 7a2a9ada-53dc-fe6c-b746-2e2835be91a3
+> POST /planets/Marte HTTP/1.1
+> Content-Type: application/json
 
 {
     "x": 5,

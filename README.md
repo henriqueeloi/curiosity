@@ -10,6 +10,9 @@ Os códigos de status <a href="https://github.com/for-GET/know-your-http-well/bl
 application/json
 
 ## Endpoints
+Link Postman: 
+<a href="https://www.getpostman.com/collections/29bcc68f37c37b9f6cf0"> https://www.getpostman.com/collections/29bcc68f37c37b9f6cf0
+</a>
 
 ### Incluir novo planeta 
 POST /planets/{name} HTTP/1.1  

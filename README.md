@@ -9,8 +9,9 @@ Os códigos de status <a href="https://github.com/for-GET/know-your-http-well/bl
 application/json
 
 # Endpoints
-## tste
-[/planets], methods=[GET]
+### [/planets], methods=[GET]
+
+
 [/planets/{name}], methods=[GET]
 [/planets/{name}], methods=[POST]
 {[/sondas/{name}], methods=[GET]}

@@ -36,14 +36,15 @@ public class Planet {
 		sondas.add(sonda);
 	}
 
+	public Collection<Sonda> getSondas() {
+		return sondas;
+	}
+
 	private void validateSondaSameName(Sonda sonda) {
 		sondas.stream().filter(s -> s.getName().equals(sonda.getName()))
 		.findAny().ifPresent(s -> {throw new RuntimeException("There is a probe with same name!");});
 	}
 
-	public Collection<Sonda> getSondas() {
-		return sondas;
-	}
 	
 	private void validateExistInSamePosition(Sonda sonda) {
 		sondas.stream()

@@ -141,9 +141,7 @@ public class PlanetController {
 			@RequestBody(required = true) List<Instruction> instructions) {
 		
 		Sonda sondaByName = planetDao.getSondaByName(name);
-		
 		SondaResource resource = new SondaResource(sondaByName);
-		
 		sondaByName.drive(instructions);
 		
 		return new ResponseEntity<SondaResource>(resource, HttpStatus.OK);

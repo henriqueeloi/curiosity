@@ -1,3 +1,4 @@
+
 ## Curiosity - Explorando Marte
 Um conjunto de sondas foi enviado pela NASA à Marte e irá pousar num planalto. Esse planalto, que curiosamente é retangular, deve ser explorado pelas sondas para que suas câmera embutidas consigam ter uma visão completa da área e enviar as imagens de volta para a Terra.
 
@@ -11,58 +12,61 @@ application/json
 ## Endpoints
 
 ### Incluir novo planeta 
-> POST /planets/Marte HTTP/1.1
+POST /planets/{name} HTTP/1.1  
+Host: localhost:8080  
 Content-Type: application/json
 
-{
-    "x": 5,
-    "y": 5
+{  
+   "x": 5,  
+   "y": 5  
 }
-
-# 
-  
+   
 ### Retorna todos os planetas
-[/planets], methods=[GET]
+GET /planets/ HTTP/1.1  
+Host: localhost:8080  
 
 ### Retorna um planeta
-[/planets/{name}], methods=[GET]
+GET /planets/{name}
+Host: localhost:8080  
 
 ### Inclui uma nova sonda em um planeta
-[/planets/{planet}/sondas/{name}],methods=[POST]
+POST /planets/Marte/sondas/sonda1 HTTP/1.1  
+Host: localhost:8080  
+Content-Type: application/json  
 
-#### Exemplo Playload
-{
-  "direction": "NORTH",
-  "coordinate": {
-    "x": 1,
-    "y": 2
-  }
+{  
+  "direction": "NORTH",  
+  "coordinate": {  
+    "x": 1,  
+    "y": 2  
+  }  
 }
 
 ### Retorna uma sonda
-{[/sondas/{name}], methods=[GET]}
+GET /sondas/sonda1 HTTP/1.1  
+Host: localhost:8080  
 
 ### Exclui uma Sonda
-[/sondas/{name}], methods=[DELETE]
-[/planets/{planet}/sondas/{name}], methods=[POST]
+DELETE /sondas/{name} HTTP/1.1  
+Host: localhost:8080  
 
 ### Exclui um planeta
-[/planets/{name}], methods=[DELETE]
+DELETE /planets/{name}  
+Host: localhost:8080  
 
 ### Enviar instrucoes
-[/sondas/{name}/instructions],methods=[POST]
+POST /sondas/sonda1/instructions HTTP/1.1  
+Host: localhost:8080  
+Content-Type: application/json  
 
-#### Playload de retorno
-{
-  "content": {
-    "name": "sonda1",
-    "currentPosition": {
-      "direction": "NORTH",
-      "coordinate": {
-        "x": 1,
-        "y": 3
-      }
-    }
-  }
-}
-
+[  
+  "LEFT",  
+  "MOVE",  
+  "LEFT",  
+  "MOVE",  
+  "LEFT",  
+  "MOVE",  
+  "LEFT",  
+  "MOVE",  
+  "MOVE"  
+]

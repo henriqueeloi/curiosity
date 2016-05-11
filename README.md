@@ -5,5 +5,16 @@ Um conjunto de sondas foi enviado pela NASA à Marte e irá pousar num planalto.
 # HTTP states
 Os códigos de status <a href="https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md">comum de resposta HTTP </a> será usado nesta API.
 
-
 # Media Types
+application/json
+
+# Endpoints
+## tste
+[/planets], methods=[GET]
+[/planets/{name}], methods=[GET]
+[/planets/{name}], methods=[POST]
+{[/sondas/{name}], methods=[GET]}
+[/sondas/{name}], methods=[DELETE]
+[/planets/{planet}/sondas/{name}], methods=[POST]
+[/planets/{name}], methods=[DELETE]
+

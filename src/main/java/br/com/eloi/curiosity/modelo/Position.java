@@ -31,12 +31,13 @@ public class Position {
 	public Position change(List<Instruction> instructions) {
 				
 		for (Instruction item : instructions) {
+						
 			if(item.equals(Instruction.LEFT)){
-				this.direction = direction.getMoviment().turnLeft();				
+				this.direction = direction.turnLeft();				
 			}else if(item.equals(Instruction.RIGHT)){
-				this.direction = direction.getMoviment().turnRight();
+				this.direction = direction.turnRight();
 			}else if(item.equals(Instruction.MOVE)){
-				this.coordinate = direction.getMoviment().move(coordinate);
+				this.coordinate = direction.move(coordinate);
 			}
 		}
 				

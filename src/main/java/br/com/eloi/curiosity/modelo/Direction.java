@@ -16,4 +16,16 @@ public enum Direction {
 	public Moviments getMoviment() {
 		return moviments;
 	}
+
+	public Direction turnLeft() {
+		return this.moviments.turnLeft();
+	}
+
+	public Direction turnRight() {
+		return this.moviments.turnRight();
+	}
+
+	public Vector move(Vector coordinate) {
+		return this.moviments.move(coordinate);
+	}
 }

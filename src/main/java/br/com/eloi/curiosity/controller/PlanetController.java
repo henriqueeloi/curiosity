@@ -6,6 +6,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -31,14 +32,14 @@ public class PlanetController {
 
 	@Autowired
 	PlanetDao planetDao;
-	
+
 	@RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<Instruction>> get(@PathVariable String id) {
 
-		List<Instruction> inputInstructios = 
+		List<Instruction> inputInstructios =
 				Arrays.asList(
-						Instruction.LEFT, 
-						Instruction.MOVE, 
+						Instruction.LEFT,
+						Instruction.MOVE,
 						Instruction.LEFT,
 						Instruction.MOVE,
 						Instruction.LEFT,
@@ -46,7 +47,7 @@ public class PlanetController {
 						Instruction.LEFT,
 						Instruction.MOVE,
 						Instruction.MOVE);
-		
+
 		return new ResponseEntity<List<Instruction>>(inputInstructios, HttpStatus.OK);
 	}
 
@@ -57,7 +58,7 @@ public class PlanetController {
 		Planet planet = new Planet(name, area.getX(), area.getY());
 
 		PlanetResource planetResource = new PlanetResource(planet);
-		
+
 		planetDao.salvePlanet(planet);
 
 		planetResource.add(linkTo(
@@ -72,19 +73,25 @@ public class PlanetController {
 
 		List<PlanetResource> listPlanets = new ArrayList<PlanetResource>();
 
-		planetDao.listPlanet().forEach((k, y) -> {
-			PlanetResource resource = new PlanetResource(y);
-			resource.add(linkTo(methodOn(PlanetController.class).getPlaneta(k)).withSelfRel());
+		planetDao.listPlanets().forEach(l -> {
+			PlanetResource resource = new PlanetResource(l);
+			resource.add(linkTo(methodOn(PlanetController.class).getPlaneta(l.getName())).withSelfRel());
 			listPlanets.add(resource);
 		});
-		
+
 		return new ResponseEntity<List<PlanetResource>>(listPlanets, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/planets/{name}", method = RequestMethod.GET)
-	public ResponseEntity<PlanetResource> getPlaneta(@PathVariable String name) {
+	public ResponseEntity<? extends Object> getPlaneta(@PathVariable String name) {
 
-		Planet planet = planetDao.getPlanetByName(name).get().getValue();
+		Optional<Planet> planetByName = planetDao.getPlanetByName(name);
+
+		if(!planetByName.isPresent()){
+			return ResponseEntity.notFound().build();
+		}
+
+		Planet planet = planetByName.get();
 
 		PlanetResource planetResource = new PlanetResource(planet);
 		return new ResponseEntity<PlanetResource>(planetResource, HttpStatus.OK);
@@ -95,10 +102,10 @@ public class PlanetController {
 		if(!planetDao.deletePlanet(name)){
 			return HttpStatus.NOT_MODIFIED;
 		}
-		
+
 		return HttpStatus.OK;
 	}
-	
+
 	@RequestMapping(value = "/planets/{planet}/sondas/{name}", method = RequestMethod.POST)
 	public HttpEntity<SondaResource> createSonda(@PathVariable String planet,
 			@PathVariable String name,
@@ -108,42 +115,44 @@ public class PlanetController {
 		SondaResource sondaResource = new SondaResource(sonda);
 
 		planetDao.getPlanetByName(planet).ifPresent(p -> {
-			p.getValue().add(sonda);
+			p.add(sonda);
 		});
 
-		sondaResource.add(linkTo(methodOn(PlanetController.class).getSonda(name)).withSelfRel());
+		sondaResource.add(linkTo(methodOn(PlanetController.class).getSonda(planet, name)).withSelfRel());
 
 		return new ResponseEntity<SondaResource>(sondaResource, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/sondas/{name}", method = RequestMethod.GET)
-	public ResponseEntity<SondaResource> getSonda(@PathVariable String name) {
+	@RequestMapping(value = "/planets/{planet}/sondas/{name}", method = RequestMethod.GET)
+	public ResponseEntity<SondaResource> getSonda(@PathVariable String name, @PathVariable String planet) {
 
-		Sonda sondaByName = planetDao.getSondaByName(name);
+		Sonda sondaByName = planetDao.getSondaByName(planet, name);
 
 		SondaResource resource = new SondaResource(sondaByName);
-		resource.add(linkTo(methodOn(PlanetController.class).getSonda(name)).withSelfRel());
+		resource.add(linkTo(methodOn(PlanetController.class).getSonda(planet, name)).withSelfRel());
 		return new ResponseEntity<SondaResource>(resource, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/sondas/{name}", method = RequestMethod.DELETE)
-	public HttpStatus deleteSonda(@PathVariable String name) {
 
-		if(!planetDao.deleteSonda(name)){
+	@RequestMapping(value = "/planets/{planet}/sondas/{name}", method = RequestMethod.DELETE)
+	public HttpStatus deleteSonda(@PathVariable String name, @PathVariable String planet) {
+
+		if(!planetDao.deleteSonda(planet, name)){
 			return HttpStatus.NOT_MODIFIED;
 		}
-		
+
 		return HttpStatus.OK;
 	}
-	
-	@RequestMapping(value = "/sondas/{name}/instructions", method = RequestMethod.POST)
-	public ResponseEntity<SondaResource> sendInstructions(@PathVariable String name,
+
+	@RequestMapping(value = "/planets/{planet}/sondas/{name}/instructions", method = RequestMethod.POST)
+	public ResponseEntity<SondaResource> sendInstructions(@PathVariable String name, @PathVariable String planet,
 			@RequestBody(required = true) List<Instruction> instructions) {
-		
-		Sonda sondaByName = planetDao.getSondaByName(name);
+
+		Sonda sondaByName = planetDao.getSondaByName(planet, name);
+		sondaByName.exec(instructions);
+
 		SondaResource resource = new SondaResource(sondaByName);
-		sondaByName.drive(instructions);
-		
+
 		return new ResponseEntity<SondaResource>(resource, HttpStatus.OK);
 	}
 

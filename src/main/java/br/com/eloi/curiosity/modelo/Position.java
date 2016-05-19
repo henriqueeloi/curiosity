@@ -1,25 +1,24 @@
 package br.com.eloi.curiosity.modelo;
 
-import java.util.List;
 
 public class Position {
 
-	private Direction direction;
+	Direction direction;
 	private Vector coordinate;
-	
+
 	public Position() {
 	}
-	
+
 	public Position(int x, int y, Direction direction) {
 		this.coordinate = new Vector(x, y);
 		this.direction = direction;
 	}
-	
+
 	public Position(Vector coordinate, Direction direction) {
 		this.coordinate = coordinate;
 		this.direction = direction;
 	}
-	
+
 	public Direction getDirection(){
 		return direction;
 	}
@@ -28,19 +27,15 @@ public class Position {
 		return this.coordinate;
 	}
 
-	public Position change(List<Instruction> instructions) {
-				
-		for (Instruction item : instructions) {
-						
-			if(item.equals(Instruction.LEFT)){
-				this.direction = direction.turnLeft();				
-			}else if(item.equals(Instruction.RIGHT)){
-				this.direction = direction.turnRight();
-			}else if(item.equals(Instruction.MOVE)){
-				this.coordinate = direction.move(coordinate);
-			}
-		}
-				
-		return this;				
-	}	
+	public Position turnLeft() {
+		return new Position(coordinate, direction.turnLeft());
+	}
+
+	public Position turnRight() {
+		return new Position(coordinate, direction.turnRight());
+	}
+
+	public Position move() {
+		return new Position(direction.move(coordinate), direction);
+	}
 }
